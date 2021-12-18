@@ -4,10 +4,7 @@
 
 package me.friwi.jcefsampleapp;
 
-import me.friwi.jcefmaven.CefAppBuilder;
-import me.friwi.jcefmaven.CefInitializationException;
-import me.friwi.jcefmaven.MavenCefAppHandlerAdapter;
-import me.friwi.jcefmaven.UnsupportedPlatformException;
+import me.friwi.jcefmaven.*;
 import org.cef.CefApp;
 import org.cef.CefApp.CefAppState;
 import org.cef.CefClient;
@@ -185,6 +182,7 @@ public class MainFrame extends JFrame {
     }
 
     public static void main(String[] args) throws UnsupportedPlatformException, CefInitializationException, IOException, InterruptedException {
+        System.out.println("INFO: Your platform is " + EnumPlatform.getCurrentPlatform().name());
         // The simple example application is created as anonymous class and points
         // to Google as the very first loaded page. Windowed rendering mode is used by
         // default. If you want to test OSR mode set |useOsr| to true and recompile.
