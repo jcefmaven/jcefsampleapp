@@ -43,7 +43,7 @@ public class TestReportGenerator {
             try {
                 String name = (new BufferedReader(new InputStreamReader((new ProcessBuilder("sw_vers", "-productName")).start().getInputStream()))).readLine();
                 String version = (new BufferedReader(new InputStreamReader((new ProcessBuilder("sw_vers", "-productVersion")).start().getInputStream()))).readLine();
-                System.out.println(version.trim()+" "+name.trim()+" ("+System.getProperty("os.version")+")");
+                System.out.println(name.trim()+" "+version.trim()+" ("+System.getProperty("os.version")+")");
             }catch (Exception e){
                 System.out.println(System.getProperty("os.version"));
             }
