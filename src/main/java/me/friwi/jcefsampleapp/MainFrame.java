@@ -182,7 +182,8 @@ public class MainFrame extends JFrame {
     }
 
     public static void main(String[] args) throws UnsupportedPlatformException, CefInitializationException, IOException, InterruptedException {
-        System.out.println("INFO: Your platform is " + EnumPlatform.getCurrentPlatform().name());
+        //Print some info for the test reports. You can ignore this.
+        TestReportGenerator.print();
         // The simple example application is created as anonymous class and points
         // to Google as the very first loaded page. Windowed rendering mode is used by
         // default. If you want to test OSR mode set |useOsr| to true and recompile.

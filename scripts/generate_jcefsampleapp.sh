@@ -15,6 +15,7 @@ cp -r ../src .
 
 #Generate pom
 ./../scripts/fill_template.sh ../pom.xml pom.xml
+./../scripts/fill_template.sh ../src/main/java/me/friwi/jcefsampleapp/TestReportGenerator.java src/main/java/me/friwi/jcefsampleapp/TestReportGenerator.java
 
 
 #Perform build
