@@ -26,7 +26,7 @@ cd release_info
 
 #Build final release information
 #Tag
-echo "release_tag_name=$tag_version.$3" >> $GITHUB_ENV
+echo "release_tag_name=$mvn_version" >> $GITHUB_ENV
 
 #Name
 echo "release_name=JCefSampleApp for $mvn_version" >> $GITHUB_ENV 
@@ -36,7 +36,7 @@ echo "release_name=JCefSampleApp for $mvn_version" >> $GITHUB_ENV
   echo "**Update JCEF to [$jcef_commit]($jcef_url)**"
   echo ""
   echo "Build: [GitHub Actions #$3]($2)"
-  echo "jcefmaven version: $mvn_version"
+  echo "JCEF maven version: $mvn_version"
   echo ""
   echo "**Test the resulting build on your platform:**"
   echo "\`\`\`"
