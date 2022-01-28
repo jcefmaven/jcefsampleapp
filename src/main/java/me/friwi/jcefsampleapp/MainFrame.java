@@ -50,6 +50,7 @@ public class MainFrame extends JFrame {
     private MainFrame(String startURL, boolean useOSR, boolean isTransparent) throws UnsupportedPlatformException, CefInitializationException, IOException, InterruptedException {
         // (0) Initialize CEF using the maven loader
         CefAppBuilder builder = new CefAppBuilder();
+        // windowless_rendering_enabled must be set to false if not wanted. 
         builder.getCefSettings().windowless_rendering_enabled = useOSR;
         // USE builder.setAppHandler INSTEAD OF CefApp.addAppHandler!
         // Fixes compatibility issues with MacOSX
