@@ -47,7 +47,7 @@ public class MainFrame extends JFrame {
      * But to be more verbose, this CTOR keeps an instance of each object on the
      * way to the browser UI.
      */
-    private MainFrame(String startURL, boolean useOSR, boolean isTransparent) throws UnsupportedPlatformException, CefInitializationException, IOException, InterruptedException {
+    private MainFrame(String startURL, boolean useOSR, boolean isTransparent, String[] args) throws UnsupportedPlatformException, CefInitializationException, IOException, InterruptedException {
         // (0) Initialize CEF using the maven loader
         CefAppBuilder builder = new CefAppBuilder();
         // windowless_rendering_enabled must be set to false if not wanted. 
@@ -61,6 +61,10 @@ public class MainFrame extends JFrame {
                 if (state == CefAppState.TERMINATED) System.exit(0);
             }
         });
+        
+        if (args.length > 0) {
+        	builder.addJcefArgs(args);
+        }
 
         // (1) The entry point to JCEF is always the class CefApp. There is only one
         //     instance per application and therefore you have to call the method
@@ -184,11 +188,13 @@ public class MainFrame extends JFrame {
 
     public static void main(String[] args) throws UnsupportedPlatformException, CefInitializationException, IOException, InterruptedException {
         //Print some info for the test reports. You can ignore this.
-        TestReportGenerator.print();
+    	// TODO maybe pass the args[] to the test report generator for inclusion in the final report?
+        TestReportGenerator.print(); 
+        
         // The simple example application is created as anonymous class and points
         // to Google as the very first loaded page. Windowed rendering mode is used by
         // default. If you want to test OSR mode set |useOsr| to true and recompile.
         boolean useOsr = false;
-        new MainFrame("http://www.google.com", useOsr, false);
+        new MainFrame("http://www.google.com", useOsr, false, args);
     }
 }
