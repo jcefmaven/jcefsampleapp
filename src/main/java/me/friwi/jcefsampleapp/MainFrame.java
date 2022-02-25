@@ -188,8 +188,7 @@ public class MainFrame extends JFrame {
 
     public static void main(String[] args) throws UnsupportedPlatformException, CefInitializationException, IOException, InterruptedException {
         //Print some info for the test reports. You can ignore this.
-    	// TODO maybe pass the args[] to the test report generator for inclusion in the final report?
-        TestReportGenerator.print(); 
+        TestReportGenerator.print(args);
         
         // The simple example application is created as anonymous class and points
         // to Google as the very first loaded page. Windowed rendering mode is used by
