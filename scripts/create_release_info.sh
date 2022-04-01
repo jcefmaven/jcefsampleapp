@@ -42,6 +42,8 @@ echo "release_name=JCefSampleApp for $mvn_version" >> $GITHUB_ENV
   echo "\`\`\`"
   echo "java -jar jcefsampleapp-$mvn_version-jar-with-dependencies.jar"
   echo "\`\`\`"
+  echo "Make sure to include the required module opens when running on JDK 16 or later. You can find them [here](https://github.com/jcefmaven/jcefmaven#limitations)."
+  echo ""
   echo "**Warning:** This will destroy any directory called \`jcef-bundle\` in your current work dir!"
 ) > release_message.md
 
