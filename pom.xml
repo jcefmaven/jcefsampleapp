@@ -18,7 +18,7 @@
         <dependency>
             <groupId>me.friwi</groupId>
             <artifactId>jcefmaven</artifactId>
-            <version>{mvn_version}</version>
+            <version>95.7.14.10</version>
         </dependency>
     </dependencies>
 
