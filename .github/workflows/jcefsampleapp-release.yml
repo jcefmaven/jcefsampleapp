@@ -22,18 +22,20 @@ jobs:
           chmod +x create_release_info.sh
           ./create_release_info.sh ${{ github.event.inputs.build_meta }} https://github.com/${{github.repository}}/actions/runs/${{github.run_id}} ${{github.run_number}} ${{ github.event.inputs.mvn_version }}
       - name: Create Release
-        id: create_release
-        uses: softprops/action-gh-release@v1
-        with:
-          name: ${{env.release_name}}
-          tag_name: ${{env.release_tag_name}}
-          body_path: release_info/release_message.md
+        run: |
+          gh release create ${{env.release_tag_name}} --title \"${{env.release_name}}\" --notes-file release_info/release_message.md
+      - name: Get release info
+        run: |
+          echo "upload_url=$(gh release view ${{env.release_tag_name}} --json upload_url --jq '.upload_url')" >> $GITHUB_ENV
+      - name: Print release info
+        run: |
+          echo "Using upload url ${{ env.upload_url }}"
       - name: Add build_meta.json       
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ env.upload_url }}
           asset_path: release_info/build_meta.json                                                           
           asset_name: build_meta.json                                     
           asset_content_type: application/json
@@ -44,7 +46,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ env.upload_url }}
           asset_path: out/jcefsampleapp-${{ github.event.inputs.mvn_version }}-jar-with-dependencies.jar                                                           
           asset_name: jcefsampleapp-${{ github.event.inputs.mvn_version }}-jar-with-dependencies.jar                                     
           asset_content_type: application/json
