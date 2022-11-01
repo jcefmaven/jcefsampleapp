@@ -24,6 +24,8 @@ jobs:
       - name: Create Release
         run: |
           gh release create ${{env.release_tag_name}} --title \"${{env.release_name}}\" --notes-file release_info/release_message.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Get release info
         run: |
           echo "upload_url=$(gh release view ${{env.release_tag_name}} --json upload_url --jq '.upload_url')" >> $GITHUB_ENV
