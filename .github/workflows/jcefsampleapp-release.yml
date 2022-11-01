@@ -26,31 +26,15 @@ jobs:
           gh release create ${{env.release_tag_name}} --title "${{env.release_name}}" --notes-file release_info/release_message.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Get release info
+      - name: Add build_meta.json
         run: |
-          echo "upload_url=$(gh release view ${{env.release_tag_name}} --json uploadUrl --jq '.uploadUrl')" >> $GITHUB_ENV
+          gh release upload ${{env.release_tag_name}} release_info/build_meta.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Print release info
-        run: |
-          echo "Using upload url ${{ env.upload_url }}"
-      - name: Add build_meta.json       
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ env.upload_url }}
-          asset_path: release_info/build_meta.json                                                           
-          asset_name: build_meta.json                                     
-          asset_content_type: application/json
       - name: Build jcefsampleapp
         run: chmod +x generate_artifacts.sh && ./generate_artifacts.sh ${{ github.event.inputs.mvn_version }}
-      - name: Add jcefsampleapp artifact       
-        uses: actions/upload-release-asset@v1
+      - name: Add jcefsampleapp artifact
+        run: |
+          gh release upload ${{env.release_tag_name}} out/jcefsampleapp-${{ github.event.inputs.mvn_version }}-jar-with-dependencies.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ env.upload_url }}
-          asset_path: out/jcefsampleapp-${{ github.event.inputs.mvn_version }}-jar-with-dependencies.jar                                                           
-          asset_name: jcefsampleapp-${{ github.event.inputs.mvn_version }}-jar-with-dependencies.jar                                     
-          asset_content_type: application/json
