@@ -23,7 +23,7 @@ jobs:
           ./create_release_info.sh ${{ github.event.inputs.build_meta }} https://github.com/${{github.repository}}/actions/runs/${{github.run_id}} ${{github.run_number}} ${{ github.event.inputs.mvn_version }}
       - name: Create Release
         run: |
-          gh release create ${{env.release_tag_name}} --title \"${{env.release_name}}\" --notes-file release_info/release_message.md
+          gh release create ${{env.release_tag_name}} --title "${{env.release_name}}" --notes-file release_info/release_message.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Get release info
