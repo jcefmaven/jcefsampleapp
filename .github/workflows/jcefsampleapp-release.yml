@@ -28,7 +28,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Get release info
         run: |
-          echo "upload_url=$(gh release view ${{env.release_tag_name}} --json upload_url --jq '.upload_url')" >> $GITHUB_ENV
+          echo "upload_url=$(gh release view ${{env.release_tag_name}} --json uploadUrl --jq '.uploadUrl')" >> $GITHUB_ENV
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Print release info
