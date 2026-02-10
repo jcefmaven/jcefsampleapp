@@ -8,7 +8,7 @@ ENV TOOLS ca-certificates curl jq openjdk-17-jdk maven
 RUN apt-get -q update && \
     apt-get -q install -y --no-install-recommends $TOOLS
     
-#Copy scipts, sources and templates
+#Copy scripts, sources and templates
 COPY scripts scripts
 COPY src src
 COPY pom.xml pom.xml
